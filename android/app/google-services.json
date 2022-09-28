@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "23188503183",
+    "project_id": "you-finance-14ed2",
+    "storage_bucket": "you-finance-14ed2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:23188503183:android:c537d766bd68b074d38efa",
+        "android_client_info": {
+          "package_name": "com.example.you_finance"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "23188503183-k6k4pu7t6es1u151k465sccj5oome31j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBgC8CeKqoEy_UtiDvwC3wyzjxTYN4Hn3k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "23188503183-k6k4pu7t6es1u151k465sccj5oome31j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
