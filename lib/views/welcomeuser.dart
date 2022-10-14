@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:you_finance/static_members/instances.dart';
 import 'package:you_finance/viewmodels/welcomeuser_viewmodel.dart';
 import 'package:you_finance/views/dashboard.dart';
 import 'package:you_finance/views/home.dart';
@@ -21,6 +22,7 @@ class _WelcomeUserState extends State<WelcomeUser> {
 
   late String _buttonText, _convertButtonText, _leadText;
   late WelcomeUserViewModel _viewModel;
+  late List<Map<String, Object?>>? _list;
   @override
   void initState() {
     // TODO: implement initState
@@ -38,7 +40,7 @@ class _WelcomeUserState extends State<WelcomeUser> {
     return Center(
       child: Container(
         padding: const EdgeInsets.only(left: 20, right: 20),
-        width: MediaQuery.of(context).size.width / 3,
+        width: MediaQuery.of(context).size.width / 4,
         height: MediaQuery.of(context).size.height * 0.75,
         decoration: BoxDecoration(
           color: Colors.white,
@@ -135,40 +137,31 @@ class _WelcomeUserState extends State<WelcomeUser> {
                       child: Text(_convertButtonText))
                 ],
               ),
-            )
+            ),
+            // RichText(text: _list.f)
           ],
         ),
       ),
     );
   }
 
-  signUp() {
-    _viewModel.signUp(
+  signUp() async {
+    await _viewModel.signUp(
         email: _emailController.value.text,
         password: _passwordController.value.text,
         passwordConfirm: _confirmPasswordController.value.text);
     (_viewModel.message == "You have signed up successfully")
-        ? () {
-            ScaffoldMessenger.of(context)
-                .showSnackBar(SnackBar(content: Text(_viewModel.message)));
-            Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => Home(body: const Dashboard())));
-          }
+        ? goToLogIn()
         : ScaffoldMessenger.of(context)
             .showSnackBar(SnackBar(content: Text(_viewModel.message)));
   }
 
-  login() {
-    _viewModel.signIn(
+  login() async {
+    await _viewModel.signIn(
         email: _emailController.value.text,
         password: _passwordController.value.text);
     (_viewModel.message == "You have signed in successfully")
-        ? Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-                builder: (context) => Home(body: const Dashboard())))
+        ? goToDashboard()
         : ScaffoldMessenger.of(context)
             .showSnackBar(SnackBar(content: Text(_viewModel.message)));
   }
@@ -177,13 +170,20 @@ class _WelcomeUserState extends State<WelcomeUser> {
     Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-            builder: (context) => Home(body: WelcomeUser(title: "Sign Up"))));
+            builder: (context) =>
+                Home(body: const WelcomeUser(title: "Sign Up"))));
   }
 
   goToLogIn() {
     Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-            builder: (context) => Home(body: WelcomeUser(title: "Login"))));
+            builder: (context) =>
+                Home(body: const WelcomeUser(title: "Login"))));
+  }
+
+  goToDashboard() {
+    Navigator.pushReplacement(context,
+        MaterialPageRoute(builder: (context) => Home(body: const Dashboard())));
   }
 }

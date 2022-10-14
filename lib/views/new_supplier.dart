@@ -17,13 +17,11 @@ class NewSupplier extends StatefulWidget {
 }
 
 class _NewSupplierState extends State<NewSupplier> {
-
   late Widget _body;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-
   }
 
   @override

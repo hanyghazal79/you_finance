@@ -20,8 +20,10 @@ class Strings {
   // CREATE TABLES SQLs
   static final String sqlTableUsers =
       'CREATE TABLE $usersTableName (id INTEGER PRIMARY KEY NOT NULL, email TEXT, password TEXT)';
+  // static final String sqlTableLogin =
+  //     'CREATE TABLE $loginTableName (datetime DATETIME, user_id INTEGER, FOREIGN KEY(user_id) REFERENCES users(id))';
   static final String sqlTableLogin =
-      'CREATE TABLE $loginTableName (datetime DATETIME, user_id INTEGER, FOREIGN KEY(user_id) REFERENCES users(id))';
+      'CREATE TABLE $loginTableName (datetime DATETIME, email TEXT, password TEXT)';
   static final String sqlTableSuppliers =
       "CREATE TABLE $suppliersTableName ( id INTEGER PRIMARY KEY NOT NULL, name TEXT, phone TEXT, address TEXT)";
   static final String sqlTableClients =
@@ -30,4 +32,7 @@ class Strings {
       'CREATE TABLE $supplierTransactionsTableName (id INTEGER PRIMARY KEY NOT NULL, value REAL, type TEXT, datetime DATETIME, supplier_id INTEGER, FOREIGN KEY(supplier_id) REFERENCES suppliers(id))';
   static final String sqlTableClientTransactions =
       'CREATE TABLE $clientTransactionsTableName (id INTEGER PRIMARY KEY NOT NULL, value REAL, type TEXT, datetime DATETIME, client_id INTEGER, FOREIGN KEY(client_id) REFERENCES clients(id))';
+
+  static final String sqlDeleteLogin = "DELETE FROM login";
+  static String? result;
 }

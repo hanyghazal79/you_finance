@@ -33,10 +33,10 @@ class LocalDB {
     await db.execute(Strings.sqlTableClientTransactions);
   }
 
-  Future insert(
+  Future<int?> insert(
       {required String table, required Map<String, dynamic> values}) async {
     Database? db = await database;
-    await db?.insert(table, values);
+    return await db?.insert(table, values);
   }
 
   Future<List<Map<String, Object?>>?> retrieve({required String sql}) async {

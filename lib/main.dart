@@ -5,6 +5,8 @@ import 'dart:js';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:you_finance/static_members/instances.dart';
+import 'package:you_finance/static_members/strings.dart';
 import 'package:you_finance/viewmodels/home_view_model.dart';
 import 'package:you_finance/viewmodels/welcomeuser_viewmodel.dart';
 import 'package:you_finance/views/home.dart';
@@ -40,7 +42,6 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -54,6 +55,7 @@ class MyApp extends StatelessWidget {
         ),
         home: Home(
           body: WelcomeUser(title: "Login"),
+          // body: Welcome(),
         ));
   }
 }

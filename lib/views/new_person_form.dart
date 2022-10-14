@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class NewSupplierForm extends StatefulWidget {
-  const NewSupplierForm({Key? key}) : super(key: key);
-
+class NewPersonForm extends StatefulWidget {
+  const NewPersonForm({Key? key, required this.type}) : super(key: key);
+  final String type;
   @override
-  State<NewSupplierForm> createState() => _NewSupplierFormState();
+  State<NewPersonForm> createState() => _NewPersonFormState();
 }
 
-class _NewSupplierFormState extends State<NewSupplierForm> {
+class _NewPersonFormState extends State<NewPersonForm> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _addressController = TextEditingController();

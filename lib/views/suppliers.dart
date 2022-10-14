@@ -5,6 +5,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
 import 'package:you_finance/viewmodels/home_view_model.dart';
 import 'package:you_finance/views/home.dart';
+import 'package:you_finance/views/new_person_form.dart';
 import 'package:you_finance/views/new_supplier.dart';
 
 class Suppliers extends StatefulWidget {
@@ -17,9 +18,7 @@ class Suppliers extends StatefulWidget {
 class _SuppliersState extends State<Suppliers> {
   late HomeViewModel _homeViewModel;
   Widget _title = Text("Suppliers");
-  Widget _body = Container(
-    color: Colors.black,
-  );
+  Widget _body = Container();
   Icon _icon = Icon(Icons.add);
   @override
   void initState() {
@@ -38,8 +37,11 @@ class _SuppliersState extends State<Suppliers> {
       floatingActionButton: FloatingActionButton(
           child: _icon,
           onPressed: () {
-            Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => Home(body: NewSupplier())));
+            Navigator.of(context).pushReplacement(MaterialPageRoute(
+                builder: (context) => Home(
+                        body: NewPersonForm(
+                      type: 'Supplier',
+                    ))));
           }),
     );
   }
