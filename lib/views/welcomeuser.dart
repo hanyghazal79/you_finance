@@ -160,7 +160,7 @@ class _WelcomeUserState extends State<WelcomeUser> {
     await _viewModel.signIn(
         email: _emailController.value.text,
         password: _passwordController.value.text);
-    (_viewModel.message == "You have signed in successfully")
+    (Instances.user != null)
         ? goToDashboard()
         : ScaffoldMessenger.of(context)
             .showSnackBar(SnackBar(content: Text(_viewModel.message)));

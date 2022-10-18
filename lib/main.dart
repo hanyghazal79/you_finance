@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:you_finance/static_members/instances.dart';
 import 'package:you_finance/static_members/strings.dart';
 import 'package:you_finance/viewmodels/home_view_model.dart';
+import 'package:you_finance/viewmodels/person_view_model.dart';
 import 'package:you_finance/viewmodels/welcomeuser_viewmodel.dart';
 import 'package:you_finance/views/home.dart';
 import 'package:provider/provider.dart';
@@ -17,11 +18,12 @@ import 'package:you_finance/widgets/welcome.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-    options: FirebaseOptions(
+    options: const FirebaseOptions(
         apiKey: "AIzaSyBgC8CeKqoEy_UtiDvwC3wyzjxTYN4Hn3k",
         projectId: "you-finance-14ed2",
         appId: "you-finance-14ed2",
-        messagingSenderId: 'xxx'),
+        messagingSenderId: 'xxx',
+        databaseURL: "https://you-finance-14ed2-default-rtdb.firebaseio.com/"),
   );
   await EasyLocalization.ensureInitialized();
   runApp(EasyLocalization(
@@ -33,7 +35,8 @@ void main() async {
     child: MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => HomeViewModel()),
-        ChangeNotifierProvider(create: (context) => WelcomeUserViewModel())
+        ChangeNotifierProvider(create: (context) => WelcomeUserViewModel()),
+        ChangeNotifierProvider(create: (context) => PersonViewModel())
       ],
       child: MyApp(),
     ),

@@ -1,9 +1,5 @@
-import 'package:you_finance/models/Person.dart';
+import 'package:you_finance/models/person.dart';
 
 class Client extends Person {
-  Client(
-      {required super.id,
-      required super.name,
-      required super.phone,
-      required super.address});
+  Client({required super.key, required super.name, required super.phone, required super.address});
 }

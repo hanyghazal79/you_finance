@@ -35,4 +35,7 @@ class Strings {
 
   static final String sqlDeleteLogin = "DELETE FROM login";
   static String? result;
+  static String path = "";
+  static final String suppliersPath = 'SUPPLIERS';
+  static final String clientsPath = 'CLIENTS';
 }

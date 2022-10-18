@@ -2,9 +2,10 @@ import 'package:adaptive_navigation/adaptive_navigation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:you_finance/static_members/instances.dart';
 import 'package:you_finance/viewmodels/home_view_model.dart';
 import 'package:you_finance/views/dashboard.dart';
-import 'package:you_finance/views/suppliers.dart';
+import 'package:you_finance/views/persons.dart';
 import 'package:you_finance/widgets/welcome.dart';
 
 class Home extends StatefulWidget {
@@ -35,18 +36,22 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return AdaptiveNavigationScaffold(
-      backgroundColor: const Color.fromRGBO(225, 225, 225, 1.0),
+        backgroundColor: const Color.fromRGBO(225, 225, 225, 1.0),
         body: widget.body, //_homeViewModel.widget,
         selectedIndex: _selectedIndex,
         destinations: _destinations,
         onDestinationSelected: (index) {
-          setState(() {
-            _selectedIndex = index;
-          });
-          _homeViewModel.setHomeWidgetFromIndex(index: _selectedIndex);
-          setState(() {
-            widget.body = _homeViewModel.widget;
-          });
+          if (Instances.user == null) {
+            return;
+          } else {
+            setState(() {
+              _selectedIndex = index;
+            });
+            _homeViewModel.setHomeWidgetFromIndex(index: _selectedIndex);
+            setState(() {
+              widget.body = _homeViewModel.widget;
+            });
+          }
         });
   }
 }

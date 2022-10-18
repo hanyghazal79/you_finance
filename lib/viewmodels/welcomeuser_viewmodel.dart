@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
@@ -25,7 +26,7 @@ class WelcomeUserViewModel extends ChangeNotifier {
     } else {
       FireAuth.instance.signUp(email: email, password: password).then((value) {
         if (value == null) {
-        message = "You have signed up successfully";
+          message = "You have signed up successfully";
         } else {
           message = value;
           notifyListeners();
@@ -48,14 +49,21 @@ class WelcomeUserViewModel extends ChangeNotifier {
     });
   }
 
- signIn({required String email, required String password}) async {
+  signIn({required String email, required String password}) async {
     if (email == "" || password == "") {
       message = "Please, fill missing value";
       notifyListeners();
     } else {
-      FireAuth.instance.signIn(email: email, password: password);
-      message = "You have signed in successfully";
-      notifyListeners();
+      User? user =
+          await FireAuth.instance.signIn(email: email, password: password);
+      Instances.user = user; // for global use //
+      if (user == null) {
+        message = "Login failed..";
+        notifyListeners();
+      } else {
+        message = "You have signed in successfully";
+        notifyListeners();
+      }
     }
   }
 

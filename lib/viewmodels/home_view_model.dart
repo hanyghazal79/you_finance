@@ -1,14 +1,12 @@
 import 'package:flutter/cupertino.dart';
-import 'package:you_finance/views/clients.dart';
 import 'package:you_finance/views/dashboard.dart';
-import 'package:you_finance/views/new_supplier.dart';
 import 'package:you_finance/views/settings.dart';
-import 'package:you_finance/views/suppliers.dart';
+import 'package:you_finance/views/persons.dart';
 import 'package:you_finance/views/welcomeuser.dart';
 import 'package:you_finance/widgets/welcome.dart';
 
 class HomeViewModel extends ChangeNotifier {
-  Widget widget = WelcomeUser(
+  Widget widget = const WelcomeUser(
     title: "Login",
   );
 
@@ -20,36 +18,36 @@ class HomeViewModel extends ChangeNotifier {
   setHomeWidgetFromIndex({int? index}) {
     switch (index) {
       case 0:
-        widget = Dashboard();
+        widget = const Dashboard();
         notifyListeners();
         break;
       case 1:
-        widget = Suppliers();
+        widget = const Persons(type: 'Suppliers');
         notifyListeners();
         break;
       case 2:
-        widget = Clients();
+        widget = const Persons(type: 'Clients');
         notifyListeners();
         break;
       case 3:
-        widget = Settings();
+        widget = const Settings();
         notifyListeners();
         break;
       default:
-        widget = Welcome();
+        widget = const Welcome();
         notifyListeners();
     }
   }
 
-  setHomeWidgetFromTask({String? task}) {
-    switch (task) {
-      case "new supplier": // to create static values file //
-        widget = NewSupplier();
-        notifyListeners();
-        break;
-      default:
-        widget = Container();
-        notifyListeners();
-    }
-  }
+  // setHomeWidgetFromTask({String? task}) {
+  //   switch (task) {
+  //     case "new supplier": // to create static values file //
+  //       widget = NewSupplier();
+  //       notifyListeners();
+  //       break;
+  //     default:
+  //       widget = Container();
+  //       notifyListeners();
+  //   }
+  // }
 }

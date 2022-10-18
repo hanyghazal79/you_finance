@@ -2,29 +2,28 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:provider/provider.dart';
-import 'package:you_finance/viewmodels/home_view_model.dart';
 import 'package:you_finance/views/home.dart';
 import 'package:you_finance/views/new_person_form.dart';
-import 'package:you_finance/views/new_supplier.dart';
 
-class Suppliers extends StatefulWidget {
-  const Suppliers({Key? key}) : super(key: key);
+class Persons extends StatefulWidget {
+  const Persons({Key? key, required this.type}) : super(key: key);
+  final type;
 
   @override
-  State<Suppliers> createState() => _SuppliersState();
+  State<Persons> createState() => _PersonsState();
 }
 
-class _SuppliersState extends State<Suppliers> {
-  late HomeViewModel _homeViewModel;
-  Widget _title = Text("Suppliers");
+class _PersonsState extends State<Persons> {
+  late ChangeNotifier _changeNotifier;
+
+  Widget _title = Text("");
   Widget _body = Container();
   Icon _icon = Icon(Icons.add);
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    _homeViewModel = Provider.of<HomeViewModel>(context, listen: false);
+    _title = (widget.type == 'Suppliers')? const Text('Suppliers') : const Text('Clients');
   }
 
   @override

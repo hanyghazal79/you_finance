@@ -21,13 +21,13 @@ class FireAuth {
     }
   }
 
-  Future signIn({required String email, required String password}) async {
-    try {
-      await auth.signInWithEmailAndPassword(email: email, password: password);
-      return null;
-    } on FirebaseAuthException catch (e) {
-      return e.message;
-    }
+  Future<User?> signIn(
+      {required String email, required String password}) async {
+    User? user;
+    await auth
+        .signInWithEmailAndPassword(email: email, password: password)
+        .then((value) => user = value.user);
+    return user;
   }
 
   Future signOut() async {
