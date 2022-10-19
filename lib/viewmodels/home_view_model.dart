@@ -10,10 +10,6 @@ class HomeViewModel extends ChangeNotifier {
     title: "Login",
   );
 
-  setHomeWidget({Widget? widget}) {
-    widget = widget;
-    notifyListeners();
-  }
 
   setHomeWidgetFromIndex({int? index}) {
     switch (index) {
@@ -34,7 +30,7 @@ class HomeViewModel extends ChangeNotifier {
         notifyListeners();
         break;
       default:
-        widget = const Welcome();
+        widget = const WelcomeUser(title: 'Login');
         notifyListeners();
     }
   }

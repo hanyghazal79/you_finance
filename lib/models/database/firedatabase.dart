@@ -10,7 +10,10 @@ class FireDatabase {
 
   final FirebaseDatabase firebaseDatabase = FirebaseDatabase.instance;
 
-  Future<String?> insert({required DatabaseReference databaseReference, required String key, required Object object}) async {
+  Future<String?> insert(
+      {required DatabaseReference databaseReference,
+      required String key,
+      required Object object}) async {
     try {
       await databaseReference.child(key).set(object);
       return null;
@@ -19,8 +22,7 @@ class FireDatabase {
     }
   }
 
-  retrieveAll({required String path}) async {
-    DatabaseReference ref = firebaseDatabase.ref().child(path);
-    await ref.get();
+  Future<DataSnapshot>retrieveAll({required DatabaseReference databaseReference}) async {
+    return await databaseReference.get();
   }
 }

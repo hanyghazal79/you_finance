@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:you_finance/models/person.dart';
@@ -7,6 +9,8 @@ import 'package:you_finance/static_members/strings.dart';
 class PersonViewModel extends ChangeNotifier {
   String message = "";
   bool isComplete = false;
+  List<Person> personList = [];
+  StreamController<DataSnapshot> streamController = StreamController.broadcast();
 
   insert({required DatabaseReference? reference, required String key, required Object object}) async {
     await FireDatabase.instance
@@ -24,5 +28,12 @@ class PersonViewModel extends ChangeNotifier {
         notifyListeners();
       }
     });
+  }
+  retrieveAll({required DatabaseReference databaseReference}) async{
+    DataSnapshot snapshot = await FireDatabase.instance.retrieveAll(databaseReference: databaseReference);
+
+    streamController.add(snapshot);
+    notifyListeners();
+
   }
 }

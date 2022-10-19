@@ -21,6 +21,7 @@ class _NewPersonFormState extends State<NewPersonForm> {
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _addressController = TextEditingController();
   late PersonViewModel _viewModel;
+  String _message = "";
   @override
   void initState() {
     // TODO: implement initState
@@ -52,7 +53,7 @@ class _NewPersonFormState extends State<NewPersonForm> {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      hintText: (widget.type == 'Supplier')
+                      hintText: (widget.type == 'Suppliers')
                           ? "Supplier name"
                           : "Client name",
                       hintStyle: const TextStyle(
@@ -67,7 +68,7 @@ class _NewPersonFormState extends State<NewPersonForm> {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      hintText: (widget.type == 'Supplier')
+                      hintText: (widget.type == 'Suppliers')
                           ? "Supplier phone"
                           : "Client phone",
                       hintStyle: const TextStyle(
@@ -82,7 +83,7 @@ class _NewPersonFormState extends State<NewPersonForm> {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      hintText: (widget.type == 'Supplier')
+                      hintText: (widget.type == 'Suppliers')
                           ? "Supplier address"
                           : "Client address",
                       hintStyle: const TextStyle(
@@ -96,7 +97,7 @@ class _NewPersonFormState extends State<NewPersonForm> {
                     borderRadius: BorderRadius.all(Radius.circular(20))),
                 child: ElevatedButton(
                   onPressed: insertPerson,
-                  child: Text((widget.type == 'Supplier')
+                  child: Text((widget.type == 'Suppliers')
                       ? "ADD SUPPLIER"
                       : "ADD CLIENT"),
                 ),
@@ -110,7 +111,7 @@ class _NewPersonFormState extends State<NewPersonForm> {
 
     Person person;
     String? key;
-    if (widget.type == 'Supplier') {
+    if (widget.type == 'Suppliers') {
       setState(() {
         Strings.path = "SUPPLIERS";
         Instances.databaseReference = Instances.suppliersReference;
@@ -134,15 +135,18 @@ class _NewPersonFormState extends State<NewPersonForm> {
           address: _addressController.value.text);
     }
     _viewModel.insert(reference: Instances.databaseReference, key: key!, object: person.toMap());
+    setState(() {
+      _message = _viewModel.message;
+    });
     ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text(_viewModel.message)));
+        .showSnackBar(SnackBar(content: Text(_message)));
     if (_viewModel.isComplete == false) {
       return;
     } else {
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-              builder: (context) => Home(body: Persons(type: (widget.type == 'Supplier')?'Suppliers' : 'Clients'))));
+              builder: (context) => Home(body: Persons(type: (widget.type == 'Suppliers')?'Suppliers' : 'Clients'))));
     }
   }
 }
